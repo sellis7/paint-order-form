@@ -13,4 +13,4 @@ is completed, the user is taken to a summary page that details the "order" with 
 
 All information is only stored as long as the current session is active. No database is used.
 
-Check it out via GitHub-Pages [here](https://pete-paint-app.herokuapp.com)
+Check it out via Heroku [here](https://pete-paint-app.herokuapp.com)
