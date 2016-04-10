@@ -19,7 +19,7 @@ function makeMenu($widths, $heights){ //FUNCTION FOR WALLS DROP MENU
     }
 } //END MAKEMENU FUNC
 //CALC CLIENT SUMMARY INFO WITH SUBMITTED WALL DIMENSIONS
-function calcWalls($widths, $heights){ 
+function calcWalls($widths, $heights){
     $rates = array('PROFESSIONAL'=>17.50,'REGULAR'=>12.50);
     $types = array('FLAT'=>24.00,'SATIN'=>31.50,'GLOSS'=>27.75);
 
@@ -30,7 +30,7 @@ function calcWalls($widths, $heights){
     $totalTime=0;
     $totalGal = 0;
     echo "<div id='summary'>";
-    echo "<table><tr>
+    echo "<table border='1' style='border-collapse: collapse'><tr>
             <th>&nbsp;</th>
             <th>Wall Width</th>
             <th>Wall Height</th>
@@ -38,7 +38,7 @@ function calcWalls($widths, $heights){
             <th>Paint/Gal</th>
             <th>Labor Hours</th>
             </tr>"; //BEGIN TABLE 1
-    for ($index=0, $x=1; $index<count($widths); $index++, $x++){ 
+    for ($index=0, $x=1; $index<count($widths); $index++, $x++){
         $area = $widths[$index]*$heights[$index];
         $gallons = $area/COVERAGE;
         $totalGal+=$gallons;
@@ -60,8 +60,9 @@ function calcWalls($widths, $heights){
         <td>$totalArea</td>
         <td>$roundGal</td>
         <td>$roundTime</td>
-        </tr></table>"; //END OF TABLE 1
-    echo "<table><tr>
+        </tr></table>
+        <br />"; //END OF TABLE 1
+    echo "<table border='1' style='border-collapse: collapse'><tr>
         <th>Job Type</th>
         <th>Paint Type</th>
         <th>Labor Cost</th>
@@ -82,11 +83,11 @@ function calcWalls($widths, $heights){
      } //CLOSE FIRST FOREACH
      echo "</table></div>"; //END SUMMARY DIV & TABLE 2
      //RETURN ALL NEEDED CALCULATIONS FOR ORDERSUM.PHP
-     return $jobTotals = array($roundGal, $roundTime, $totalArea);  
+     return $jobTotals = array($roundGal, $roundTime, $totalArea);
 } //END OF CALCWALLS FUNC
 
 function showSummary(){
-    require'orderForm.php'; // PROVIDE SECONDARY FORM FIELDS TO ORDER  
+    require'orderForm.php'; // PROVIDE SECONDARY FORM FIELDS TO ORDER
 }
 
 $widths = array(); //INITIALIZE EMPTY ARRAYS
@@ -101,12 +102,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $heights = array_values($heights);
     }
     // Minimal form validation:
-    if (is_numeric($_POST['width'])&& is_numeric($_POST['height'])){ 
+    if (is_numeric($_POST['width'])&& is_numeric($_POST['height'])){
         $w = $_POST['width'];
         $h = $_POST['height'];
         array_push($widths, $w);
-        array_push($heights, $h);       
-    }     
+        array_push($heights, $h);
+    }
 }//END SERVER REQUEST METHOD!
 ?>
 <div id="detailsForm"> <!-- establish wall details for summary -->
@@ -119,14 +120,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </span></p>
             <p>Submitted wall dimensions: <?php makeMenu($widths, $heights);?></p>
         </div>
-<?php 
+<?php
     $single_ww = implode(',', $widths); //WIDTH STRING TO PASS AND HIDE
     echo '<input type="hidden" name="userWidths" value="' . htmlspecialchars($single_ww) . '">';
     $single_wh = implode(',', $heights); //HEIGHT STRING TO PASS AND HIDE
     echo '<input type="hidden" name="userHeights" value="' . htmlspecialchars($single_wh) . '">';
     if(isset($_POST['summary'])){ //PROVIDE ALL CALCULATIONS
             $jobTotals = calcWalls($widths, $heights);
-            } 
+            }
 ?>
     </form> <!-- end of details form w php action on this page -->
 </div>    <!-- end of detailsForm div -->
@@ -144,6 +145,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   ?>
     </form></div>
  <?php
-    echo '</div>'; //END CONTENT DIV STARTED IN HEADER.HTML 
+    echo '</div>'; //END CONTENT DIV STARTED IN HEADER.HTML
     include'includes/phpfooter.html';
     ?>
