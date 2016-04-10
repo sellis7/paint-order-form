@@ -12,3 +12,5 @@ of values based on different types and quality of product to be chosen. Once the
 is completed, the user is taken to a summary page that details the "order" with the final job details.
 
 All information is only stored as long as the current session is active. No database is used.
+
+Check it out via GitHub-Pages [here](http://sellis7.github.io/paint-order-form)
